@@ -1,0 +1,10 @@
+(TEST (if #true 1 0) 1 1 1)
+(TEST (if #false 1 2) 2 2 2)
+(TEST (if "hi" 1 2) error 1 1)
+(TEST (if 0 1 2) error 1 2)
+(TEST (or 0 "yay") error 0 #t)
+
+The conditionals were a little hard to grasp, but after testing, I can offer insight that the languages differ in how strictly their rules are enforced.
+Language 1 is so strict that only true/false is allowed. Everything else seems to crash the test, resulting in an error.
+Language 2 is a little looser, meaning that everything is true except for false. This makes only false as false, so 0, "", "0" all behave as true.
+Language 3 is greatly customized, where a handful of values are false, and everything else is true. Some values I saw as false are #false, 0, "", "0".
